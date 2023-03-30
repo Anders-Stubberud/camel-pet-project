@@ -28,10 +28,6 @@ public class Controller implements Initializable {
             translate.play();
         }
     }
-
-    public void printer() {
-        System.out.println("hoppefaen");
-    }
     
     @Override
     //Interfacet Initializable med metoden initialize gjør at controlleren fyrer løs koden i initialize metoden når FXMLloadder.load() avfyres i App-klassen
@@ -60,7 +56,7 @@ public class Controller implements Initializable {
 
         gameActive = true;
 
-        //Starter collisionDetection i Functionality-klassen
+        //Starter collisionDetection i CollitionDetector-klassen
         collisionDetector = new CollisionDetector(gameActive, box, en, to, tre);
         collisionDetector.detectCollisions();
     }
