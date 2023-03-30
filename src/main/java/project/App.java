@@ -2,12 +2,17 @@ package project;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class App extends Application {
+
+    private Controller myController;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -15,8 +20,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Example App");
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("App.fxml"))));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+        Parent root = loader.load();
+        myController = loader.getController();
+        Scene scene = new Scene(root);
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if (key.getCode() == KeyCode.SPACE) {
+                myController.handleKeyPress();
+            }
+        });
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
