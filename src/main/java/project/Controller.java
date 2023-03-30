@@ -61,7 +61,7 @@ public class Controller implements Initializable {
         gameActive = true;
 
         //Starter collisionDetection i Functionality-klassen
-        collisionDetector = new CollisionDetector(gameActive, box, en, this);
+        collisionDetector = new CollisionDetector(gameActive, box, en, to, tre);
         collisionDetector.detectCollisions();
     }
 }
