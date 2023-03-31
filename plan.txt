@@ -5,3 +5,4 @@
     -Vise highscore
     -Dersom highscore overgår all-time-record, så kan highscore skrives til fil.
     -Vise all-time-record
+-bytte ut den løpende GIF'en med et stillestående bilde ved game over
