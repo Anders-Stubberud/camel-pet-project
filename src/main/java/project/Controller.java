@@ -8,6 +8,7 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -19,7 +20,11 @@ public class Controller implements Initializable {
     @FXML
     private ImageView kamel;
 
+    @FXML
+    private Polyline hbox;
+
     private TranslateTransition translate = new TranslateTransition();
+    private TranslateTransition translateHbox = new TranslateTransition();
     private CollisionDetector collisionDetector;
     private boolean gameActive;
     public boolean kamelJumpInProgress;
@@ -33,6 +38,7 @@ public class Controller implements Initializable {
         if (!kamelJumpInProgress && gameActive) {
             kamelJumpInProgress = true;
             translate.setOnFinished(event -> kamelJumpInProgress = false);
+            translateHbox.play();
             translate.play();
         }
     }
@@ -60,10 +66,15 @@ public class Controller implements Initializable {
         //Animasjon for kamel
         translate.setNode(kamel);
         translate.setDuration(Duration.millis(300));
-        //CycleCount må være 2 fordi hver vei telles som en cycle?
         translate.setCycleCount(2);
         translate.setByY(-100);
         translate.setAutoReverse(true);
+        //Animasjon for hitboxen, så den alltid følger kamelen
+        translateHbox.setNode(hbox);
+        translateHbox.setDuration(Duration.millis(300));
+        translateHbox.setCycleCount(2);
+        translateHbox.setByY(-100);
+        translateHbox.setAutoReverse(true);
 
         //Animasjoner for de røde rektanglene
         makeMap();
@@ -77,7 +88,7 @@ public class Controller implements Initializable {
         gameActive = true;
 
         //Starter collisionDetection i CollitionDetector-klassen
-        collisionDetector = new CollisionDetector(this, kamel, en, to, tre);
+        collisionDetector = new CollisionDetector(this, hbox, en, to, tre);
         collisionDetector.detectCollisions();
     }
 }

@@ -6,30 +6,30 @@ import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.scene.image.ImageView;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 
 public class CollisionDetector {
     private Controller controller;
     public boolean fire;
-    private ImageView kamel;
+    private Polyline hbox;
     private Rectangle en;
     private Rectangle to;
     private Rectangle tre;
     private Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
         if (
-            kamel.getBoundsInParent().intersects(en.localToParent(en.getBoundsInLocal()).getMinX(), en.localToParent(en.getBoundsInLocal()).getMinY(), en.getWidth(), en.getHeight())
-            || kamel.getBoundsInParent().intersects(to.localToParent(to.getBoundsInLocal()).getMinX(), to.localToParent(to.getBoundsInLocal()).getMinY(), to.getWidth(), to.getHeight())
-            || kamel.getBoundsInParent().intersects(tre.localToParent(tre.getBoundsInLocal()).getMinX(), tre.localToParent(tre.getBoundsInLocal()).getMinY(), tre.getWidth(), tre.getHeight())
+            hbox.getBoundsInParent().intersects(en.localToParent(en.getBoundsInLocal()).getMinX(), en.localToParent(en.getBoundsInLocal()).getMinY(), en.getWidth(), en.getHeight())
+            || hbox.getBoundsInParent().intersects(to.localToParent(to.getBoundsInLocal()).getMinX(), to.localToParent(to.getBoundsInLocal()).getMinY(), to.getWidth(), to.getHeight())
+            || hbox.getBoundsInParent().intersects(tre.localToParent(tre.getBoundsInLocal()).getMinX(), tre.localToParent(tre.getBoundsInLocal()).getMinY(), tre.getWidth(), tre.getHeight())
             ) {
             stopTimeline();
             System.out.println("GAME OVER!!!");
         }
     }));
 
-    public CollisionDetector(Controller controller, ImageView kamel, Rectangle en, Rectangle to, Rectangle tre) {
+    public CollisionDetector(Controller controller, Polyline hbox, Rectangle en, Rectangle to, Rectangle tre) {
         this.controller = controller;
-        this.kamel = kamel;
+        this.hbox = hbox;
         this.en = en;
         this.to = to;
         this.tre = tre;
