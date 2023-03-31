@@ -35,7 +35,7 @@
                   <Image url="@../images/transparentKamel.gif" />
                </image>
             </ImageView>
-            <Polyline fx:id="hbox" fill="CHARTREUSE" opacity="0.79" points="21.0, 12.0, 92.0, 15.0, 74.0, 59.0, 21.0, 59.0" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Polyline fx:id="hbox" fill="CHARTREUSE" opacity="0.0" points="21.0, 12.0, 92.0, 15.0, 74.0, 59.0, 21.0, 59.0" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="50.0" top="10.0" />
                </GridPane.margin>

@@ -80,8 +80,8 @@ public class Controller implements Initializable {
         makeMap();
         for (Map.Entry<TranslateTransition, Rectangle> entry : getMap().entrySet()) {
             entry.getKey().setNode(entry.getValue());
-            entry.getKey().setDuration(Duration.millis(3000));
-            entry.getKey().setByX(-900);
+            entry.getKey().setDuration(Duration.millis(30000));
+            entry.getKey().setByX(-9000);
             entry.getKey().play();
         }
 

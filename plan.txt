@@ -1,6 +1,7 @@
-Har fått til å detektere kollisjon.
-Neste steg er å få de røde stolpene til å stoppe opp når den blå treffer dem. 
-    Kan muligens gjøres i "stopTimeline()" metoden i "CollisionDetector" klassen. 
-
-Ideer:
-Blå rektangel kan byttes ut med en GIF, liknende dinosauren fra chrome
+-Få rektanglene til å spawne/despawne
+    -Øke hastighet etterhvert
+-Bytte rektangler med bilder
+-Telle score mens spillet pågår
+    -Vise highscore
+    -Dersom highscore overgår all-time-record, så kan highscore skrives til fil.
+    -Vise all-time-record
