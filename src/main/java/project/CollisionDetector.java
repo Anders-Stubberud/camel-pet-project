@@ -2,12 +2,16 @@ package project;
 
 // import java.time.Duration;
 import javafx.util.Duration;
+
+import java.util.Map;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.scene.shape.Rectangle;
 
 public class CollisionDetector {
-    private boolean gameActive;
+    private Controller controller;
     public boolean fire;
     private Rectangle box;
     private Rectangle en;
@@ -24,25 +28,26 @@ public class CollisionDetector {
         }
     }));
 
-    public CollisionDetector(boolean gameActive, Rectangle box, Rectangle en, Rectangle to, Rectangle tre) {
-        this.gameActive = gameActive;
+    public CollisionDetector(Controller controller, Rectangle box, Rectangle en, Rectangle to, Rectangle tre) {
+        this.controller = controller;
         this.box = box;
         this.en = en;
         this.to = to;
         this.tre = tre;
     }
 
+    //Denne starter timeline-objektet
     public void detectCollisions() {
-        if (! gameActive) {
-            //kan calle metoden stopTimeline uten en referanse til en instans av en klasse fordi stopTimeline er i samme klasse som metoden kalles fra. 
-            stopTimeline();
-        }
         timeline.setCycleCount(Timeline.INDEFINITE); 
         timeline.play(); 
     }
 
     private void stopTimeline() {
         timeline.stop();
+        controller.gameOver();
+        for (TranslateTransition transition : controller.getMap().keySet()) {
+            transition.stop();
+        }
     }
 
 }
