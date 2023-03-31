@@ -3,8 +3,6 @@ package project;
 // import java.time.Duration;
 import javafx.util.Duration;
 
-import java.util.Map;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
