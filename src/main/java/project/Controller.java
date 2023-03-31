@@ -65,22 +65,22 @@ public class Controller implements Initializable {
 
         //Animasjon for kamel
         translate.setNode(kamel);
-        translate.setDuration(Duration.millis(300));
+        translate.setDuration(Duration.millis(500));
         translate.setCycleCount(2);
-        translate.setByY(-100);
+        translate.setByY(-150);
         translate.setAutoReverse(true);
         //Animasjon for hitboxen, så den alltid følger kamelen
         translateHbox.setNode(hbox);
-        translateHbox.setDuration(Duration.millis(300));
+        translateHbox.setDuration(Duration.millis(500));
         translateHbox.setCycleCount(2);
-        translateHbox.setByY(-100);
+        translateHbox.setByY(-150);
         translateHbox.setAutoReverse(true);
 
         //Animasjoner for de røde rektanglene
         makeMap();
         for (Map.Entry<TranslateTransition, Rectangle> entry : getMap().entrySet()) {
             entry.getKey().setNode(entry.getValue());
-            entry.getKey().setDuration(Duration.millis(5000));
+            entry.getKey().setDuration(Duration.millis(3000));
             entry.getKey().setByX(-900);
             entry.getKey().play();
         }
