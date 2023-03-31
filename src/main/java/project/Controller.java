@@ -7,18 +7,22 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
     @FXML
-    private Rectangle en, to, tre, box;
+    private Rectangle en, to, tre;
+
+    @FXML
+    private ImageView kamel;
 
     private TranslateTransition translate = new TranslateTransition();
     private CollisionDetector collisionDetector;
     private boolean gameActive;
-    public boolean blueJumpInProgress;
+    public boolean kamelJumpInProgress;
 
     private TranslateTransition translate1 = new TranslateTransition();
     private TranslateTransition translate2 = new TranslateTransition();
@@ -26,9 +30,9 @@ public class Controller implements Initializable {
     Map<TranslateTransition, Rectangle> map;
 
     public void handleKeyPress() {
-        if (!blueJumpInProgress && gameActive) {
-            blueJumpInProgress = true;
-            translate.setOnFinished(event -> blueJumpInProgress = false);
+        if (!kamelJumpInProgress && gameActive) {
+            kamelJumpInProgress = true;
+            translate.setOnFinished(event -> kamelJumpInProgress = false);
             translate.play();
         }
     }
@@ -53,8 +57,8 @@ public class Controller implements Initializable {
     //Interfacet Initializable med metoden initialize gjør at controlleren fyrer løs koden i initialize metoden når FXMLloadder.load() avfyres i App-klassen
     public void initialize(URL location, ResourceBundle resources) {
 
-        //Animasjon for blå rektangel
-        translate.setNode(box);
+        //Animasjon for kamel
+        translate.setNode(kamel);
         translate.setDuration(Duration.millis(300));
         //CycleCount må være 2 fordi hver vei telles som en cycle?
         translate.setCycleCount(2);
@@ -73,7 +77,7 @@ public class Controller implements Initializable {
         gameActive = true;
 
         //Starter collisionDetection i CollitionDetector-klassen
-        collisionDetector = new CollisionDetector(this, box, en, to, tre);
+        collisionDetector = new CollisionDetector(this, kamel, en, to, tre);
         collisionDetector.detectCollisions();
     }
 }
