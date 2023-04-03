@@ -30,20 +30,19 @@
                   <Image url="@../images/desert.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="kamel" fitHeight="120.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fx:id="player" fitHeight="120.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/transparentKamel.gif" />
                </image>
             </ImageView>
-            <Polyline fx:id="hbox" fill="CHARTREUSE" opacity="0.0" points="21.0, 12.0, 92.0, 15.0, 74.0, 59.0, 21.0, 59.0" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Polyline fx:id="hitbox" fill="CHARTREUSE" opacity="0.0" points="21.0, 12.0, 92.0, 15.0, 74.0, 59.0, 21.0, 59.0" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="50.0" top="10.0" />
                </GridPane.margin>
             </Polyline>
          </children>
       </GridPane>
-      <Rectangle fx:id="tre" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="2000.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="to" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="1200.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="en" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="700.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="specialObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="1200.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="normalObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="700.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
    </children>
 </AnchorPane>

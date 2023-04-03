@@ -1,4 +1,8 @@
 -Få rektanglene til å spawne/despawne
+    -Samme rektangel(ene) som basically går bakover hele tiden, men blir satt til ny x posisjon ved visse tider
+        -Bruke et timeline objekt som kontinuerlig setter obstraclene tilbake
+            -Bruke en variabel som oppdaterer seg for å redusere tiden obstaclene skal bruke på å komme seg fra A til B, slik at de går fortere
+    -Controller klassen må opprette objekter av hjelpeklassene for deretter å ha getter-metoder, slik at hjelpeobjektene kan interagere med de riktige andre hjelpeobjektene
     -Øke hastighet etterhvert
 -Bytte rektangler med bilder
 -Telle score mens spillet pågår
@@ -6,3 +10,9 @@
     -Dersom highscore overgår all-time-record, så kan highscore skrives til fil.
     -Vise all-time-record
 -bytte ut den løpende GIF'en med et stillestående bilde ved game over
+
+
+*
+Har laget controller med såpass mange gette for å kunne gi ut samme referanse til hejlpeobjekter til de andre hjelpemetodene som trenger andre hjelpeobjekter,
+dersom alle hadde opprettet nye objekter, så hadde de ikke hatt referanse til de eksakt samme objektene
+*

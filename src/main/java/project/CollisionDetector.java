@@ -10,43 +10,38 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 
 public class CollisionDetector {
+
     private Controller controller;
-    public boolean fire;
-    private Polyline hbox;
-    private Rectangle en;
-    private Rectangle to;
-    private Rectangle tre;
-    private Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
+    private Polyline hitbox;
+    private Rectangle normalObstacle;
+    private Rectangle specialObstacle;
+    private Timeline collisionDetectionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
         if (
-            hbox.getBoundsInParent().intersects(en.localToParent(en.getBoundsInLocal()).getMinX(), en.localToParent(en.getBoundsInLocal()).getMinY(), en.getWidth(), en.getHeight())
-            || hbox.getBoundsInParent().intersects(to.localToParent(to.getBoundsInLocal()).getMinX(), to.localToParent(to.getBoundsInLocal()).getMinY(), to.getWidth(), to.getHeight())
-            || hbox.getBoundsInParent().intersects(tre.localToParent(tre.getBoundsInLocal()).getMinX(), tre.localToParent(tre.getBoundsInLocal()).getMinY(), tre.getWidth(), tre.getHeight())
+            hitbox.getBoundsInParent().intersects(normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinX(), normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinY(), normalObstacle.getWidth(), normalObstacle.getHeight())
+            || hitbox.getBoundsInParent().intersects(specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinX(), specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinY(), specialObstacle.getWidth(), specialObstacle.getHeight())
             ) {
             stopTimeline();
             System.out.println("GAME OVER!!!");
         }
     }));
 
-    public CollisionDetector(Controller controller, Polyline hbox, Rectangle en, Rectangle to, Rectangle tre) {
+    public CollisionDetector(Controller controller, Polyline hitbox, Rectangle normalObstacle, Rectangle specialObstacle) {
         this.controller = controller;
-        this.hbox = hbox;
-        this.en = en;
-        this.to = to;
-        this.tre = tre;
+        this.hitbox = hitbox;
+        this.normalObstacle = normalObstacle;
+        this.specialObstacle = specialObstacle;
     }
 
     //Denne starter timeline-objektet
     public void detectCollisions() {
-        timeline.setCycleCount(Timeline.INDEFINITE); 
-        timeline.play(); 
+        collisionDetectionTimeline.setCycleCount(Timeline.INDEFINITE); 
+        collisionDetectionTimeline.play(); 
     }
 
     private void stopTimeline() {
-        timeline.stop();
+        collisionDetectionTimeline.stop();
         controller.gameOver();
-        for (TranslateTransition transition : controller.getMap().keySet()) {
-            transition.stop();
-        }
+        controller.getObstacleTransition().stopObstacleTransition();
     }
 
 }

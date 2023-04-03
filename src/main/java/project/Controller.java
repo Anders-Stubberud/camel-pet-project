@@ -15,80 +15,64 @@ import javafx.util.Duration;
 public class Controller implements Initializable {
 
     @FXML
-    private Rectangle en, to, tre;
+    private Rectangle normalObstacle, specialObstacle;
 
     @FXML
-    private ImageView kamel;
+    private ImageView player;
 
     @FXML
-    private Polyline hbox;
+    private Polyline hitbox;
 
-    private TranslateTransition translate = new TranslateTransition();
-    private TranslateTransition translateHbox = new TranslateTransition();
-    private CollisionDetector collisionDetector;
     private boolean gameActive;
-    public boolean kamelJumpInProgress;
 
-    private TranslateTransition translate1 = new TranslateTransition();
-    private TranslateTransition translate2 = new TranslateTransition();
-    private TranslateTransition translate3 = new TranslateTransition();
-    Map<TranslateTransition, Rectangle> map;
+    private CollisionDetector collisionDetector;
+    private PlayerTransition playerTransition;
+    private ObstacleTransition obstacleTransition;
 
-    public void handleKeyPress() {
-        if (!kamelJumpInProgress && gameActive) {
-            kamelJumpInProgress = true;
-            translate.setOnFinished(event -> kamelJumpInProgress = false);
-            translateHbox.play();
-            translate.play();
-        }
+    public CollisionDetector getCollisionDetector() {
+        return collisionDetector;
     }
 
-    //Dersom map er variabel i toppen av filen, ettersom det ikke blir instansiert noen Controller
-    //når FXMLLoader.load(), så vil variabelen map heller ikke være instansiert. 
-    //Kaller dermed metode som først lager map, og så en som returnerer mappet. 
-    //Må ha separat lage og returnere metode for å kunne hente samme map til CollisionDetecor sin stopTimeline().
-    private void makeMap() {
-        map = new HashMap<>() { {put(translate1, en);} {put(translate2, to);} {put(translate3, tre);} };
+    public PlayerTransition getPlayerTransition() {
+        return playerTransition;
     }
 
-    public Map<TranslateTransition, Rectangle> getMap() {
-        return map;
+    public ObstacleTransition getObstacleTransition() {
+        return obstacleTransition;
+    }
+
+    public boolean getGameStatus() {
+        return gameActive;
     }
 
     public void gameOver() {
         gameActive = false;
     }
+
+    public void gameStarted() {
+        gameActive = true;
+    }
+
+    public void handleKeyPress() {
+        playerTransition.handleKeyPressInPlayerTransition();
+    }
+
+    public Map<TranslateTransition, Rectangle> getMap() {
+        return obstacleTransition.getMap();
+    }
+
+    public void startCollisionDetection() {
+        collisionDetector = new CollisionDetector(this, hitbox, normalObstacle, specialObstacle);
+        collisionDetector.detectCollisions();
+    }
     
     @Override
     //Interfacet Initializable med metoden initialize gjør at controlleren fyrer løs koden i initialize metoden når FXMLloadder.load() avfyres i App-klassen
     public void initialize(URL location, ResourceBundle resources) {
-
-        //Animasjon for kamel
-        translate.setNode(kamel);
-        translate.setDuration(Duration.millis(500));
-        translate.setCycleCount(2);
-        translate.setByY(-150);
-        translate.setAutoReverse(true);
-        //Animasjon for hitboxen, så den alltid følger kamelen
-        translateHbox.setNode(hbox);
-        translateHbox.setDuration(Duration.millis(500));
-        translateHbox.setCycleCount(2);
-        translateHbox.setByY(-150);
-        translateHbox.setAutoReverse(true);
-
-        //Animasjoner for de røde rektanglene
-        makeMap();
-        for (Map.Entry<TranslateTransition, Rectangle> entry : getMap().entrySet()) {
-            entry.getKey().setNode(entry.getValue());
-            entry.getKey().setDuration(Duration.millis(30000));
-            entry.getKey().setByX(-9000);
-            entry.getKey().play();
-        }
-
-        gameActive = true;
-
-        //Starter collisionDetection i CollitionDetector-klassen
-        collisionDetector = new CollisionDetector(this, hbox, en, to, tre);
-        collisionDetector.detectCollisions();
+        playerTransition = new PlayerTransition(this, player, hitbox);
+        playerTransition.startPlayerTransition();
+        
+        obstacleTransition = new ObstacleTransition(this, normalObstacle, specialObstacle);
+        obstacleTransition.startObstacleTransition();
     }
 }
