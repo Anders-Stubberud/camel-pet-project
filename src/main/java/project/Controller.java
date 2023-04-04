@@ -1,7 +1,6 @@
 package project;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -10,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
