@@ -5,7 +5,6 @@ import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 
@@ -13,8 +12,7 @@ public class CollisionDetector {
 
     private Controller controller;
     private Polyline hitbox;
-    private Rectangle normalObstacle;
-    private Rectangle specialObstacle;
+    private Rectangle normalObstacle, specialObstacle;
     private Timeline collisionDetectionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
         if (
             hitbox.getBoundsInParent().intersects(normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinX(), normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinY(), normalObstacle.getWidth(), normalObstacle.getHeight())
