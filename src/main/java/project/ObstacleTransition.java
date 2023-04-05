@@ -3,6 +3,7 @@ package project;
 import javafx.util.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -17,13 +18,37 @@ public class ObstacleTransition {
     private Map<TranslateTransition, Rectangle> map;
     private Timeline obstacleTransitionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
     { 
-        //Sjekke om noen av obstaclene er "out of bounds", isåfall sette ett av dem ut i spill. 
+        if (normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinX() == -100
+        && specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinX() == -100
+        ) {
+            spawnNewObstacle();
+        }
     }}));
 
     public ObstacleTransition(Controller controller, Rectangle normalObstacle, Rectangle specialObstacle) {
         this.controller = controller;
         this.normalObstacle = normalObstacle;
         this.specialObstacle = specialObstacle;
+    }
+
+    public void spawnNewObstacle() {
+        Random random = new Random();
+        int decideBetweenNormalOrSpecialObject = random.nextInt(6);
+        System.out.println(decideBetweenNormalOrSpecialObject);
+        if (decideBetweenNormalOrSpecialObject == 0) {
+            specialObstacle.setTranslateX(1000);
+            translateSpecialObstacle.setNode(specialObstacle);
+            translateSpecialObstacle.setDuration(Duration.millis(3000));
+            translateSpecialObstacle.setByX(-1000);
+            translateSpecialObstacle.play();
+        }
+        else {
+            normalObstacle.setTranslateX(1000);
+            translateNormalObstacle.setNode(normalObstacle);
+            translateNormalObstacle.setDuration(Duration.millis(3000));
+            translateNormalObstacle.setByX(-1000);
+            translateNormalObstacle.play();
+        }
     }
 
     private void makeMap() {
@@ -37,12 +62,8 @@ public class ObstacleTransition {
     public void startObstacleTransition() {
         makeMap();
 
-        for (Map.Entry<TranslateTransition, Rectangle> entry : getMap().entrySet()) {
-            entry.getKey().setNode(entry.getValue());
-            entry.getKey().setDuration(Duration.millis(30000));
-            entry.getKey().setByX(-9000);
-            entry.getKey().play();
-        }
+        obstacleTransitionTimeline.setCycleCount(Timeline.INDEFINITE);
+        obstacleTransitionTimeline.play();
     
         controller.gameStarted();
 
@@ -53,6 +74,7 @@ public class ObstacleTransition {
         for (TranslateTransition transition : map.keySet()) {
             transition.stop();
         }
+        obstacleTransitionTimeline.stop();
     }
 
 }

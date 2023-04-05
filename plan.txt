@@ -1,9 +1,5 @@
--Få rektanglene til å spawne/despawne
-    -Samme rektangel(ene) som basically går bakover hele tiden, men blir satt til ny x posisjon ved visse tider
-        -Bruke et timeline objekt som kontinuerlig setter obstraclene tilbake
-            -Bruke en variabel som oppdaterer seg for å redusere tiden obstaclene skal bruke på å komme seg fra A til B, slik at de går fortere
-    -Controller klassen må opprette objekter av hjelpeklassene for deretter å ha getter-metoder, slik at hjelpeobjektene kan interagere med de riktige andre hjelpeobjektene
-    -Øke hastighet etterhvert
+-Øke hastighet etterhvert
+    -Bruek eget timeline objekt for dette
 -Bytte rektangler med bilder
 -Telle score mens spillet pågår
     -Vise highscore

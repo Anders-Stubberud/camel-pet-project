@@ -42,7 +42,7 @@
             </Polyline>
          </children>
       </GridPane>
-      <Rectangle fx:id="specialObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="1200.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="normalObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="700.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="specialObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="-100" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="normalObstacle" arcHeight="5.0" arcWidth="5.0" fill="#ff00fd" height="40.0" layoutX="-100" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
    </children>
 </AnchorPane>
