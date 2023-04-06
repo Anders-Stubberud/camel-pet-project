@@ -27,12 +27,12 @@
          <children>
             <ImageView fitHeight="367.0" fitWidth="637.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/desert.gif" />
+                  <Image url="@../project/images/desert.gif" />
                </image>
             </ImageView>
             <ImageView fx:id="player" fitHeight="120.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/transparentKamel.gif" />
+                  <Image url="@../project/images/transparentKamel.gif" />
                </image>
             </ImageView>
             <Polyline fx:id="hitbox" fill="CHARTREUSE" opacity="0.0" points="21.0, 12.0, 92.0, 15.0, 74.0, 59.0, 21.0, 59.0" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -40,6 +40,11 @@
                   <Insets left="50.0" top="10.0" />
                </GridPane.margin>
             </Polyline>
+            <ImageView fx:id="gameOverText" fitHeight="150.0" fitWidth="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/gameOverText.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
       <Rectangle fx:id="specialObstacle" arcHeight="5.0" arcWidth="5.0" fill="RED" height="40.0" layoutX="-100" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />

@@ -16,7 +16,7 @@ public class Controller implements Initializable {
     private Rectangle normalObstacle, specialObstacle;
 
     @FXML
-    private ImageView player;
+    private ImageView player, gameOverText;
 
     @FXML
     private Polyline hitbox;
@@ -26,6 +26,10 @@ public class Controller implements Initializable {
     private CollisionDetector collisionDetector;
     private PlayerTransition playerTransition;
     private ObstacleTransition obstacleTransition;
+
+    public ImageView getGameOverText() {
+        return gameOverText;
+    }
 
     public CollisionDetector getCollisionDetector() {
         return collisionDetector;

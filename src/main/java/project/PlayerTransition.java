@@ -2,6 +2,7 @@ package project;
 
 import javafx.util.Duration;
 import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
 
@@ -13,6 +14,7 @@ public class PlayerTransition {
     public boolean playerJumpInProgress;
     private TranslateTransition translatePlayer = new TranslateTransition();
     private TranslateTransition translateHitbox = new TranslateTransition();
+    private Image playerGameOver = new Image(getClass().getResource("images/kamelGameOver.png").toString());
 
     public PlayerTransition(Controller controller, ImageView player, Polyline hitbox) {
         this.controller = controller;
@@ -47,6 +49,10 @@ public class PlayerTransition {
             translateHitbox.play();
             translatePlayer.play();
         }
+    }
+
+    public void changePlayerGameOver() {
+        player.setImage(playerGameOver);
     }
 
 }

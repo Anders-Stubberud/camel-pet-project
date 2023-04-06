@@ -19,7 +19,8 @@ public class CollisionDetector {
             || hitbox.getBoundsInParent().intersects(specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinX(), specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinY(), specialObstacle.getWidth(), specialObstacle.getHeight())
             ) {
             stopTimeline();
-            System.out.println("GAME OVER!!!");
+            controller.getPlayerTransition().changePlayerGameOver();
+            controller.getGameOverText().setOpacity(1);
         }
     }));
 

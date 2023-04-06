@@ -16,12 +16,14 @@ public class ObstacleTransition {
     private TranslateTransition translateNormalObstacle = new TranslateTransition();
     private TranslateTransition translateSpecialObstacle = new TranslateTransition();
     private Map<TranslateTransition, Rectangle> map;
+    private int durationObstacles = 3100;
     private Timeline obstacleTransitionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
     { 
         if (normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinX() == -100
         && specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinX() == -100
         ) {
-            spawnNewObstacle();
+            durationObstacles -= 100;
+            spawnNewObstacle(durationObstacles);
         }
     }}));
 
@@ -31,21 +33,21 @@ public class ObstacleTransition {
         this.specialObstacle = specialObstacle;
     }
 
-    public void spawnNewObstacle() {
+    public void spawnNewObstacle(int durationObstacles) {
         Random random = new Random();
         int decideBetweenNormalOrSpecialObject = random.nextInt(6);
         System.out.println(decideBetweenNormalOrSpecialObject);
         if (decideBetweenNormalOrSpecialObject == 0) {
             specialObstacle.setTranslateX(1000);
             translateSpecialObstacle.setNode(specialObstacle);
-            translateSpecialObstacle.setDuration(Duration.millis(3000));
+            translateSpecialObstacle.setDuration(Duration.millis(durationObstacles));
             translateSpecialObstacle.setByX(-1000);
             translateSpecialObstacle.play();
         }
         else {
             normalObstacle.setTranslateX(1000);
             translateNormalObstacle.setNode(normalObstacle);
-            translateNormalObstacle.setDuration(Duration.millis(3000));
+            translateNormalObstacle.setDuration(Duration.millis(durationObstacles));
             translateNormalObstacle.setByX(-1000);
             translateNormalObstacle.play();
         }
