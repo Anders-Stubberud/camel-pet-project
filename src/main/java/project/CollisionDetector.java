@@ -5,18 +5,17 @@ import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Rectangle;
 
 public class CollisionDetector {
 
     private Controller controller;
-    private Polyline hitbox;
-    private Rectangle normalObstacle, specialObstacle;
+    private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
     private Timeline collisionDetectionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
         if (
-            hitbox.getBoundsInParent().intersects(normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinX(), normalObstacle.localToParent(normalObstacle.getBoundsInLocal()).getMinY(), normalObstacle.getWidth(), normalObstacle.getHeight())
-            || hitbox.getBoundsInParent().intersects(specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinX(), specialObstacle.localToParent(specialObstacle.getBoundsInLocal()).getMinY(), specialObstacle.getWidth(), specialObstacle.getHeight())
+            hitbox.getBoundsInParent().intersects(hitboxNormalObstacle.getBoundsInParent())
+            || hitbox.getBoundsInParent().intersects(hitboxSpecialObstacle.getBoundsInParent())
             ) {
             stopTimeline();
             controller.getPlayerTransition().changePlayerGameOver();
@@ -24,11 +23,11 @@ public class CollisionDetector {
         }
     }));
 
-    public CollisionDetector(Controller controller, Polyline hitbox, Rectangle normalObstacle, Rectangle specialObstacle) {
+    public CollisionDetector(Controller controller, Polyline hitbox, Polyline hitboxNormalObstacle, Polyline hitboxSpecialObstacle) {
         this.controller = controller;
         this.hitbox = hitbox;
-        this.normalObstacle = normalObstacle;
-        this.specialObstacle = specialObstacle;
+        this.hitboxNormalObstacle = hitboxNormalObstacle;
+        this.hitboxSpecialObstacle = hitboxSpecialObstacle;
     }
 
     //Denne starter timeline-objektet

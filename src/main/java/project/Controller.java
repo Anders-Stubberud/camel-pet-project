@@ -8,18 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Rectangle;
 
 public class Controller implements Initializable {
 
     @FXML
-    private Rectangle normalObstacle, specialObstacle;
+    private ImageView player, gameOverText, normalObstacle, specialObstacle;
 
     @FXML
-    private ImageView player, gameOverText;
-
-    @FXML
-    private Polyline hitbox;
+    private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
 
     private boolean gameActive;
 
@@ -59,12 +55,12 @@ public class Controller implements Initializable {
         playerTransition.handleKeyPressInPlayerTransition();
     }
 
-    public Map<TranslateTransition, Rectangle> getMap() {
-        return obstacleTransition.getMap();
+    public Map<TranslateTransition, ImageView> getMap() {
+        return obstacleTransition.getMap(); 
     }
 
     public void startCollisionDetection() {
-        collisionDetector = new CollisionDetector(this, hitbox, normalObstacle, specialObstacle);
+        collisionDetector = new CollisionDetector(this, hitbox, hitboxNormalObstacle, hitboxSpecialObstacle);
         collisionDetector.detectCollisions();
     }
     
@@ -74,7 +70,7 @@ public class Controller implements Initializable {
         playerTransition = new PlayerTransition(this, player, hitbox);
         playerTransition.startPlayerTransition();
         
-        obstacleTransition = new ObstacleTransition(this, normalObstacle, specialObstacle);
+        obstacleTransition = new ObstacleTransition(this, normalObstacle, specialObstacle, hitboxNormalObstacle, hitboxSpecialObstacle);
         obstacleTransition.startObstacleTransition();
     }
 }
