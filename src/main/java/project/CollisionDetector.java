@@ -5,7 +5,6 @@ import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
 
 public class CollisionDetector {
@@ -40,6 +39,7 @@ public class CollisionDetector {
         collisionDetectionTimeline.stop();
         controller.gameOver();
         controller.getObstacleTransition().stopObstacleTransition();
+        controller.getScoreCounter().stopScoreCounter();
     }
 
 }

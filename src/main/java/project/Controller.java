@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
 
@@ -17,11 +18,23 @@ public class Controller implements Initializable {
     @FXML
     private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
 
+    @FXML
+    private Label scoreLabel;
+
     private boolean gameActive;
 
     private CollisionDetector collisionDetector;
     private PlayerTransition playerTransition;
     private ObstacleTransition obstacleTransition;
+    private ScoreCounter scoreCounter;
+
+    public Label getScoreLabel() {
+        return scoreLabel;
+    }
+
+    public ScoreCounter getScoreCounter() {
+        return scoreCounter;
+    }
 
     public ImageView getGameOverText() {
         return gameOverText;
@@ -59,6 +72,7 @@ public class Controller implements Initializable {
         return obstacleTransition.getMap(); 
     }
 
+    //Putte denne inne i initialize?
     public void startCollisionDetection() {
         collisionDetector = new CollisionDetector(this, hitbox, hitboxNormalObstacle, hitboxSpecialObstacle);
         collisionDetector.detectCollisions();
@@ -72,5 +86,8 @@ public class Controller implements Initializable {
         
         obstacleTransition = new ObstacleTransition(this, normalObstacle, specialObstacle, hitboxNormalObstacle, hitboxSpecialObstacle);
         obstacleTransition.startObstacleTransition();
+
+        scoreCounter = new ScoreCounter(this);
+        scoreCounter.startScoreCounter();
     }
 }

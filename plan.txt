@@ -1,14 +1,8 @@
--Øke hastighet etterhvert
-    -Bruek eget timeline objekt for dette
--Bytte rektangler med bilder
--Telle score mens spillet pågår
-    -Vise highscore
-    -Dersom highscore overgår all-time-record, så kan highscore skrives til fil.
-    -Vise all-time-record
--bytte ut den løpende GIF'en med et stillestående bilde ved game over
+Mangler egt bare skrive til fil
 
+Ta bruker til en annen app, vise topp 10, de kan skrive inn navn, dersom navnet er innen topp 10, så oppdateres den
+    Dette kan være en egen klasse som implementerer comparable; Klassen inneholder navn og score, sortere på scoren
 
-*
-Har laget controller med såpass mange gette for å kunne gi ut samme referanse til hejlpeobjekter til de andre hjelpemetodene som trenger andre hjelpeobjekter,
-dersom alle hadde opprettet nye objekter, så hadde de ikke hatt referanse til de eksakt samme objektene
-*
+Skrive "resultatlisten" til fil. 
+
+Ha med "press "P" to play again, press "R" to ragequit"
