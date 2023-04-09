@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
 
@@ -21,12 +22,34 @@ public class Controller implements Initializable {
     @FXML
     private Label scoreLabel;
 
+    private Stage stage;
     private boolean gameActive;
-
     private CollisionDetector collisionDetector;
     private PlayerTransition playerTransition;
     private ObstacleTransition obstacleTransition;
     private ScoreCounter scoreCounter;
+    private ScoreController scoreController = new ScoreController();
+    private Stage primaryStage;
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    } 
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public ScoreController getScoreController() {
+        return scoreController;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
 
     public Label getScoreLabel() {
         return scoreLabel;
@@ -89,5 +112,7 @@ public class Controller implements Initializable {
 
         scoreCounter = new ScoreCounter(this);
         scoreCounter.startScoreCounter();
+
+        scoreController.setController(this);
     }
 }

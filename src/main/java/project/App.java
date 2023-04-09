@@ -17,12 +17,13 @@ public class App extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
-
+           
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
         Parent root = loader.load();
         myController = loader.getController();
+        myController.setStage(primaryStage);
         Scene scene = new Scene(root);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
@@ -30,7 +31,7 @@ public class App extends Application {
                 myController.handleKeyPress();
             }
         });
-
+        myController.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -3,6 +3,8 @@ package project;
 // import java.time.Duration;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.shape.Polyline;
@@ -40,6 +42,12 @@ public class CollisionDetector {
         controller.gameOver();
         controller.getObstacleTransition().stopObstacleTransition();
         controller.getScoreCounter().stopScoreCounter();
+        controller.getScoreController().changeFromGameToScoreboard();
+        try {
+            controller.getScoreController().showScoreboard();
+        } catch (IOException e) {
+            System.out.println("StopTimeLine");
+        }
     }
 
 }

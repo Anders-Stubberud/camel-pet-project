@@ -42,7 +42,6 @@ public class ObstacleTransition {
     public void spawnNewObstacle(int durationObstacles) {
         Random random = new Random();
         int decideBetweenNormalOrSpecialObject = random.nextInt(2);
-        System.out.println(decideBetweenNormalOrSpecialObject);
         if (decideBetweenNormalOrSpecialObject == 0) {
             specialObstacle.setTranslateX(1000);
             translateSpecialObstacle.setNode(specialObstacle);

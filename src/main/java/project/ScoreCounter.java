@@ -14,6 +14,10 @@ public class ScoreCounter {
         controller.getScoreLabel().setText("Score: " + Integer.toString(score));
     }}));
 
+    public int getScore() {
+        return score;
+    }
+
     public ScoreCounter (Controller controller) {
         this.controller = controller;
     }
@@ -26,5 +30,6 @@ public class ScoreCounter {
     public void stopScoreCounter() {
         scoreCounterTransitionTimeline.stop();
     }
+
 
 }
