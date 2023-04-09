@@ -29,6 +29,13 @@ public class ScoreCounter {
 
     public void stopScoreCounter() {
         scoreCounterTransitionTimeline.stop();
+        controller.getInfo1().setOpacity(1);
+        controller.getInfo2().setOpacity(1);
+        controller.getUserInput().setOpacity(1);
+        controller.getSubmit().setOpacity(1);
+        controller.getSubmit().setDisable(false);
+        controller.getUserInput().setDisable(false);
+        controller.getUserInput().requestFocus();
     }
 
 

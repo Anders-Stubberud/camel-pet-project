@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
@@ -20,7 +22,13 @@ public class Controller implements Initializable {
     private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
 
     @FXML
-    private Label scoreLabel;
+    private Label scoreLabel, info1, info2;
+
+    @FXML
+    private TextField userInput;
+
+    @FXML
+    private Button submit;
 
     private Stage stage;
     private boolean gameActive;
@@ -28,15 +36,27 @@ public class Controller implements Initializable {
     private PlayerTransition playerTransition;
     private ObstacleTransition obstacleTransition;
     private ScoreCounter scoreCounter;
-    private ScoreController scoreController = new ScoreController();
-    private Stage primaryStage;
+    private ScoreController scoreController;
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    } 
+    @FXML
+    private void submitUserInfo() {
+        scoreController.changeFromGameToScoreboard();
+    }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public Button getSubmit() {
+        return submit;
+    }
+
+    public TextField getUserInput() {
+        return userInput;
+    }
+
+    public Label getInfo1() {
+        return info1;
+    }
+
+    public Label getInfo2() {
+        return info2;
     }
 
     public ScoreController getScoreController() {
@@ -113,6 +133,9 @@ public class Controller implements Initializable {
         scoreCounter = new ScoreCounter(this);
         scoreCounter.startScoreCounter();
 
+        scoreController = new ScoreController();
         scoreController.setController(this);
+
+        submit.disableProperty();
     }
 }

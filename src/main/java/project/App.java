@@ -31,9 +31,8 @@ public class App extends Application {
                 myController.handleKeyPress();
             }
         });
-        myController.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show(); 
     }
 }
 
