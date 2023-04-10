@@ -24,6 +24,7 @@ public class App extends Application {
         Parent root = loader.load();
         myController = loader.getController();
         myController.setStage(primaryStage);
+        myController.setApp(this);
         Scene scene = new Scene(root);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {

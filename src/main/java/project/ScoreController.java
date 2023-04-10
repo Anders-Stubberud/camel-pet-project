@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 public class ScoreController implements Initializable {
@@ -28,20 +30,41 @@ public class ScoreController implements Initializable {
         controller.getStage().close();
         try {
             controller.getStage().setScene(new Scene(FXMLLoader.load(getClass().getResource("ScoreApp.fxml"))));
+            controller.getStage().getScene().addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+                handleKeyPress(key);
+            });
         } catch (IOException e) {
             System.out.println("scoreCounterLoadScoreboard failed");
         }
         controller.getStage().show();
     }
 
+    public void handleKeyPress(KeyEvent key) {
+        if (key.getCode() == KeyCode.P) {
+            try {
+                controller.getApp().start(controller.getStage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (key.getCode() == KeyCode.R) {
+            controller.getStage().close();
+        }
+    }
+
     public void showScoreboard() throws IOException {
         BufferedReader lese;
         try {
             lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
+
+            Label ekstraPlass = new Label("");
+            ekstraPlass.setPadding(new Insets(20, 0, 0, 150));
+            vbox.getChildren().add(ekstraPlass);
+
             String linje = lese.readLine();
+            int plass = 0;
 
             while (linje != null) {
-                Label label = new Label(linje);
+                Label label = new Label(Integer.toString(plass += 1) +".place  " + linje);
                 label.setPadding(new Insets(0, 0, 0, 150));
                 vbox.getChildren().add(label);
                 linje = lese.readLine();

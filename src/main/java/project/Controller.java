@@ -37,11 +37,20 @@ public class Controller implements Initializable {
     private ObstacleTransition obstacleTransition;
     private ScoreCounter scoreCounter;
     private ScoreController scoreController;
+    private App app;
 
     @FXML
     private void submitUserInfo() {
         scoreCounter.getAllDataFromFileToListAndSort();;
         scoreController.changeFromGameToScoreboard();
+    }
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    public App getApp() {
+        return app;
     }
 
     public Button getSubmit() {
