@@ -24,7 +24,6 @@
                   <Insets left="150.0" top="150.0" />
                </padding>
             </Label>
-            <!-- <Button mnemonicParsing="false" onAction="#fireButton" text="Button" /> -->
          </children>
       </VBox>
    </children>

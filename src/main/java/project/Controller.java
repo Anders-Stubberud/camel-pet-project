@@ -40,6 +40,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void submitUserInfo() {
+        scoreCounter.writeStatsToFile();
         scoreController.changeFromGameToScoreboard();
     }
 

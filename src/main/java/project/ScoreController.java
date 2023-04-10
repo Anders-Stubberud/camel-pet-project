@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -40,9 +41,9 @@ public class ScoreController implements Initializable {
             String linje = lese.readLine();
 
             while (linje != null) {
-                System.out.println(linje);
                 linje = lese.readLine();
                 Label label = new Label(linje);
+                label.setPadding(new Insets(0, 0, 0, 150));
                 vbox.getChildren().add(label);
             }
 

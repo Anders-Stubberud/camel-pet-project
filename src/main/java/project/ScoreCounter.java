@@ -2,6 +2,10 @@ package project;
 
 import javafx.util.Duration;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
@@ -36,6 +40,18 @@ public class ScoreCounter {
         controller.getSubmit().setDisable(false);
         controller.getUserInput().setDisable(false);
         controller.getUserInput().requestFocus();
+    }
+
+    public void writeStatsToFile() {
+        try {
+            String navn = controller.getUserInput().getText();
+            BufferedWriter skrive = new BufferedWriter(new FileWriter("src/main/java/project/scoreList.txt", true));
+            skrive.write("\n" + navn + "   -   " + score);
+            skrive.close();
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
