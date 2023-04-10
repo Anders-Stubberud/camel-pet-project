@@ -22,7 +22,7 @@ public class Controller implements Initializable {
     private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
 
     @FXML
-    private Label scoreLabel, info1, info2;
+    private Label scoreLabel, info1, info2, exception;
 
     @FXML
     private TextField userInput;
@@ -43,6 +43,10 @@ public class Controller implements Initializable {
     private void submitUserInfo() {
         scoreCounter.getAllDataFromFileToListAndSort();;
         scoreController.changeFromGameToScoreboard();
+    }
+
+    public Label getException() {
+        return exception;
     }
 
     public void setApp(App app) {

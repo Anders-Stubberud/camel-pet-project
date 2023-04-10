@@ -69,27 +69,35 @@ public class ScoreCounter {
     }
 
     public void getAllDataFromFileToListAndSort() {
-        BufferedReader lese;
-        try {
-            lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
-            String linje = lese.readLine();
-
-            while (linje != null) {
-                String [] deler = linje.split("-");
-                scoreComparerList.add(new ScoreComparer(deler[0], Integer.parseInt(deler[1])));
-                linje = lese.readLine();
+        if (controller.getUserInput().getText().matches("[a-zA-Z\\s]+")) {
+            BufferedReader lese;
+            try {
+                lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
+                String linje = lese.readLine();
+    
+                while (linje != null) {
+                    String [] deler = linje.split("-");
+                    scoreComparerList.add(new ScoreComparer(deler[0], Integer.parseInt(deler[1])));
+                    linje = lese.readLine();
+                }
+    
+                lese.close();
+    
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            lese.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    
+            scoreComparerList.add(new ScoreComparer(controller.getUserInput().getText(), score));
+            Collections.sort(scoreComparerList);
+    
+            writeStatsToFile();
+        }
+        else {
+            controller.getException().setText("Name can only contain letters and space");
+            controller.getUserInput().requestFocus();
+            throw new IllegalArgumentException("Name can only contain letters and space");
         }
 
-        scoreComparerList.add(new ScoreComparer(controller.getUserInput().getText(), score));
-        Collections.sort(scoreComparerList);
-
-        writeStatsToFile();
     }
 
 }
