@@ -69,7 +69,7 @@ public class ScoreCounter {
     }
 
     public void getAllDataFromFileToListAndSort() {
-        if (controller.getUserInput().getText().matches("[a-zA-Z\\s]+")) {
+        if (validUsername(controller.getUserInput().getText())) {
             BufferedReader lese;
             try {
                 lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
@@ -98,6 +98,12 @@ public class ScoreCounter {
             throw new IllegalArgumentException("Name can only contain letters and space");
         }
 
+    }
+
+    public boolean validUsername(String username) {
+        if (username.matches("[a-zA-Z\\s]+")) {
+            return true;
+        } return false;
     }
 
 }
