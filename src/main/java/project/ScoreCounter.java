@@ -2,9 +2,14 @@ package project;
 
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +17,7 @@ import javafx.animation.Timeline;
 public class ScoreCounter {
     
     private Controller controller;
+    private List<ScoreComparer> scoreComparerList = new ArrayList<>();
     private int score;
     private Timeline scoreCounterTransitionTimeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {{
         score += 1;
@@ -44,9 +50,17 @@ public class ScoreCounter {
 
     public void writeStatsToFile() {
         try {
-            String navn = controller.getUserInput().getText();
-            BufferedWriter skrive = new BufferedWriter(new FileWriter("src/main/java/project/scoreList.txt", true));
-            skrive.write("\n" + navn + "   -   " + score);
+            boolean avoidNewLineFirstTime = true;
+            BufferedWriter skrive = new BufferedWriter(new FileWriter("src/main/java/project/scoreList.txt"));
+            for (ScoreComparer scoreComparer : scoreComparerList) {
+                if (avoidNewLineFirstTime) {
+                    skrive.write(scoreComparer.getName() + "-" + scoreComparer.getScore());
+                    avoidNewLineFirstTime = false;
+                }
+                else {
+                    skrive.write("\n" + scoreComparer.getName() + "-" + scoreComparer.getScore());
+                }
+            }
             skrive.close();
         } 
         catch (IOException e) {
@@ -54,5 +68,29 @@ public class ScoreCounter {
         }
     }
 
+    public void getAllDataFromFileToListAndSort() {
+        BufferedReader lese;
+        try {
+            lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
+            String linje = lese.readLine();
+
+            while (linje != null) {
+                System.out.println(linje);
+                String [] deler = linje.split("-");
+                scoreComparerList.add(new ScoreComparer(deler[0], Integer.parseInt(deler[1])));
+                linje = lese.readLine();
+            }
+
+            lese.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        scoreComparerList.add(new ScoreComparer(controller.getUserInput().getText(), score));
+        Collections.sort(scoreComparerList);
+
+        writeStatsToFile();
+    }
 
 }

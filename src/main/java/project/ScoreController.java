@@ -41,10 +41,10 @@ public class ScoreController implements Initializable {
             String linje = lese.readLine();
 
             while (linje != null) {
-                linje = lese.readLine();
                 Label label = new Label(linje);
                 label.setPadding(new Insets(0, 0, 0, 150));
                 vbox.getChildren().add(label);
+                linje = lese.readLine();
             }
 
             lese.close();
