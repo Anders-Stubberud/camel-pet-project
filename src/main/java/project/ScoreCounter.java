@@ -75,7 +75,6 @@ public class ScoreCounter {
             String linje = lese.readLine();
 
             while (linje != null) {
-                System.out.println(linje);
                 String [] deler = linje.split("-");
                 scoreComparerList.add(new ScoreComparer(deler[0], Integer.parseInt(deler[1])));
                 linje = lese.readLine();
