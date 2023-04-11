@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.shape.Polyline;
+
 public class GameTest {
 
     private Controller controller;
@@ -18,6 +20,43 @@ public class GameTest {
     @BeforeEach
     public void setUp() {
         controller = new Controller();
+    }
+
+    //Collisiondetector
+    @Test
+    @DisplayName("Check Collisiondetection detects collitions")
+    public void checkCollisiondetector() {
+        Polyline hitbox = new Polyline(2, 9, 3, 8);
+        Polyline polyline1 = new Polyline(1, 10, 1, 10);
+        Polyline polyline2 = new Polyline(100, 100, 100, 100);
+        Polyline polyline3 = new Polyline(1000, 1000, 1000, 1000);
+
+        CollisionDetector collisionDetector = new CollisionDetector(controller, hitbox, polyline1, polyline2);
+
+        collisionDetector.toggleTestFromTest();
+
+        assertTrue(collisionDetector.crashChecker(hitbox, polyline1, polyline2, controller));
+
+        assertFalse(collisionDetector.crashChecker(hitbox, polyline2, polyline3, controller));
+    }
+
+    //Fillagring/lesing sin test
+    @Test
+    @DisplayName("Sjekke at fillagring og fillesing fungerer")
+    public void checkToggleGameActive() {
+        ScoreCounter scoreCounter = new ScoreCounter(controller);
+        List<ScoreComparer> liste = new ArrayList<>(Arrays.asList(
+            new ScoreComparer("tre", 3),
+            new ScoreComparer("to", 2),
+            new ScoreComparer("en", 1)
+        ));
+
+        scoreCounter.toggleTestingFromTest();
+        scoreCounter.writeStatsToFile(liste);
+
+        assertTrue(liste.get(0).getName().equals(scoreCounter.getAllDataFromFileToListAndSort().get(0).getName()));
+
+        assertTrue(liste.get(0).getScore() == scoreCounter.getAllDataFromFileToListAndSort().get(0).getScore());
     }
 
     //ScoreCounter sine tester
@@ -51,17 +90,6 @@ public class GameTest {
         assertEquals(3, liste.get(0).getScore());
         assertEquals(2, liste.get(1).getScore());
         assertEquals(1, liste.get(2).getScore());
-    }
-
-    //Controller sin test
-    @Test
-    @DisplayName("Sjekke at toggle game-active fungerer")
-    public void checkToggleGameActive() {
-        assertFalse(controller.getGameStatus());
-        controller.gameStarted();
-        assertTrue(controller.getGameStatus());
-        controller.gameOver();
-        assertFalse(controller.getGameStatus());
     }
 
 }

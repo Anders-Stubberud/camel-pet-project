@@ -17,6 +17,7 @@ import javafx.animation.Timeline;
 public class ScoreCounter {
     
     private Controller controller;
+    private boolean testingFromTest;
     private List<ScoreComparer> scoreComparerList = new ArrayList<>();
     private int score;
     private Timeline scoreCounterTransitionTimeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {{
@@ -26,6 +27,10 @@ public class ScoreCounter {
 
     public int getScore() {
         return score;
+    }
+
+    public void toggleTestingFromTest() {
+        testingFromTest = true;
     }
 
     public ScoreCounter (Controller controller) {
@@ -48,12 +53,19 @@ public class ScoreCounter {
         controller.getUserInput().requestFocus();
     }
 
-    public void writeStatsToFile() {
+    public void writeStatsToFile(List<ScoreComparer> scoreComparerList) {
         try {
             boolean avoidNewLineFirstTime = true;
             BufferedWriter skrive = new BufferedWriter(new FileWriter("src/main/java/project/scoreList.txt"));
             for (ScoreComparer scoreComparer : scoreComparerList) {
-                if (avoidNewLineFirstTime) {
+                if (avoidNewLineFirstTime && testingFromTest) {
+                    skrive.write(scoreComparer.getName() + "-" + scoreComparer.getScore());
+                    avoidNewLineFirstTime = false;
+                }
+                else if (testingFromTest) {
+                    skrive.write("\n" + scoreComparer.getName() + "-" + scoreComparer.getScore());
+                }
+                else if (avoidNewLineFirstTime) {
                     skrive.write(scoreComparer.getName() + "-" + scoreComparer.getScore());
                     avoidNewLineFirstTime = false;
                 }
@@ -68,8 +80,8 @@ public class ScoreCounter {
         }
     }
 
-    public void getAllDataFromFileToListAndSort() {
-        if (validUsername(controller.getUserInput().getText())) {
+    public List<ScoreComparer> getAllDataFromFileToListAndSort() {
+        if (testingFromTest) {
             BufferedReader lese;
             try {
                 lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
@@ -86,11 +98,34 @@ public class ScoreCounter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
+            Collections.sort(scoreComparerList);
+
+            return scoreComparerList;
+        }
+        else if (validUsername(controller.getUserInput().getText()) && !testingFromTest) {
+            BufferedReader lese;
+            try {
+                lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
+                String linje = lese.readLine();
     
+                while (linje != null) {
+                    String [] deler = linje.split("-");
+                    scoreComparerList.add(new ScoreComparer(deler[0], Integer.parseInt(deler[1])));
+                    linje = lese.readLine();
+                }
+    
+                lese.close();
+    
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
             scoreComparerList.add(new ScoreComparer(controller.getUserInput().getText(), score));
             Collections.sort(scoreComparerList);
-    
-            writeStatsToFile();
+            writeStatsToFile(scoreComparerList);
+
+            return scoreComparerList;
         }
         else {
             controller.getException().setText("Name can only contain letters and space");

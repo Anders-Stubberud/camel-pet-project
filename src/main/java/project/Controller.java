@@ -128,12 +128,6 @@ public class Controller implements Initializable {
     public Map<TranslateTransition, ImageView> getMap() {
         return obstacleTransition.getMap(); 
     }
-
-    //Putte denne inne i initialize?
-    public void startCollisionDetection() {
-        collisionDetector = new CollisionDetector(this, hitbox, hitboxNormalObstacle, hitboxSpecialObstacle);
-        collisionDetector.detectCollisions();
-    }
     
     @Override
     //Interfacet Initializable med metoden initialize gjør at controlleren fyrer løs koden i initialize metoden når FXMLloadder.load() avfyres i App-klassen
@@ -143,6 +137,9 @@ public class Controller implements Initializable {
         
         obstacleTransition = new ObstacleTransition(this, normalObstacle, specialObstacle, hitboxNormalObstacle, hitboxSpecialObstacle);
         obstacleTransition.startObstacleTransition();
+
+        collisionDetector = new CollisionDetector(this, hitbox, hitboxNormalObstacle, hitboxSpecialObstacle);
+        collisionDetector.detectCollisions();
 
         scoreCounter = new ScoreCounter(this);
         scoreCounter.startScoreCounter();

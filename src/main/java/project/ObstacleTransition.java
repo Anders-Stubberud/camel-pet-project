@@ -85,8 +85,6 @@ public class ObstacleTransition {
         obstacleTransitionTimeline.play();
     
         controller.gameStarted();
-
-        controller.startCollisionDetection();
     }
 
     public void stopObstacleTransition() {
