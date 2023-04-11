@@ -2,15 +2,11 @@ package project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +38,7 @@ public class GameTest {
         assertFalse(scoreCounter.validUsername(unValidUsername));
     }
 
-    //ScoreComprer sine tester
+    //ScoreComparer sin test
     @Test
     @DisplayName("Sjekke at ScoreComparer sorterer riktig")
     public void checkCorrectSorting() {
@@ -56,4 +52,16 @@ public class GameTest {
         assertEquals(2, liste.get(1).getScore());
         assertEquals(1, liste.get(2).getScore());
     }
+
+    //Controller sin test
+    @Test
+    @DisplayName("Sjekke at toggle game-active fungerer")
+    public void checkToggleGameActive() {
+        assertFalse(controller.getGameStatus());
+        controller.gameStarted();
+        assertTrue(controller.getGameStatus());
+        controller.gameOver();
+        assertFalse(controller.getGameStatus());
+    }
+
 }
