@@ -44,6 +44,8 @@
             Controller:
                 Controller'en virker som et bindeledd mellom Model og View, hvorav controlleren gir informasjon til Model, Model behandler informasjonen, og gir eventuelt informasjon tilbake til Controller'en, som igjen eventuelt oppdaterer View-komponentet. Controllere er implementert for hver av View'ene, i form av "Controller.java" for "App.fxml", og "ScoreController.java" for "ScoreApp.fxml". Disse Controller'erne har forøvrig tilgang til hverandre, for å virke som et bindeledd mellom de ulike View-komponentene denne applikasjonen benytter seg av. 
 
+        Etter å ha fullført prosjektet, så innser jeg at det burde ha blitt opprettet en separat klasse som hadde orden på relasjonene mellom de ulike klassene, slik at controlleren ikke hadde trengt å gjøre dette. Controlleren endte opp med å inneholde relativt mange getter-metoder som de andre klassene kunne benytte seg av, og selv om det kanskje ikke regnes som fullverdig funksjonalitet, så hadde det passet bedre overens med Model-View-Controller prinsippet dersom controller-klassen hadde sluppet dette. De viktigste aspektene med Model-View-Controller prinsippet er imidlertid på plass ved at Model-aspektet har ansvaret for selve funksjonaliteten bak applikasjonen, og at controlleren virker som et bindeledd mellom modellen og view'et (brukergrensesnittet). 
+
 
     4. Hvordan har dere gått frem når dere skulle teste appen deres, og hvorfor har
     dere valgt de testene dere har? Har dere testet alle deler av koden? Hvis ikke,
