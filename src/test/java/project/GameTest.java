@@ -43,7 +43,7 @@ public class GameTest {
     //Fillagring/lesing sin test
     @Test
     @DisplayName("Sjekke at fillagring og fillesing fungerer")
-    public void checkToggleGameActive() {
+    public void checkFileTransaction() {
         ScoreCounter scoreCounter = new ScoreCounter(controller);
         List<ScoreComparer> liste = new ArrayList<>(Arrays.asList(
             new ScoreComparer("tre", 3),
