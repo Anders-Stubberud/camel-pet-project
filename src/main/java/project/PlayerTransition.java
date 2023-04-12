@@ -11,7 +11,7 @@ public class PlayerTransition {
     private Controller controller;
     private ImageView player;
     private Polyline hitbox;
-    public boolean playerJumpInProgress;
+    private boolean playerJumpInProgress;
     private TranslateTransition translatePlayer = new TranslateTransition();
     private TranslateTransition translateHitbox = new TranslateTransition();
     private Image playerGameOver = new Image(getClass().getResource("images/kamelGameOver.png").toString());
