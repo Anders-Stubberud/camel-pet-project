@@ -49,7 +49,7 @@ public class CollisionDetector {
         collisionDetectionTimeline.play(); 
     }
 
-    private void stopTimeline() {
+    public void stopTimeline() {
         collisionDetectionTimeline.stop();
         controller.gameOver();
         controller.getObstacleTransition().stopObstacleTransition();

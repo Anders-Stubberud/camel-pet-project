@@ -80,6 +80,19 @@ public class GameTest {
         assertFalse(scoreCounter.validUsername(unValidUsername));
     }
 
+    //Sjekk for collision timeline i CollisionDetector
+    @Test
+    @DisplayName("Sørge for at timeline for collisiondetection ikke starter før spillet starter")
+    public void checkTimelineNotActiveAtStart() {
+        Polyline hitbox = new Polyline(1, 2, 3, 4);
+        Polyline polyline1 = new Polyline(10, 10, 10, 10);
+        Polyline polyline2 = new Polyline(100, 100, 100, 100);
+
+        CollisionDetector collisionDetector = new CollisionDetector(controller, hitbox, polyline1, polyline2);
+
+        assertTrue(collisionDetector.getcollisionDetectionTimeline().getStatus() == Animation.Status.STOPPED);
+    }
+
     //ScoreComparer sin test
     @Test
     @DisplayName("Sjekke at ScoreComparer sorterer riktig")
@@ -93,19 +106,6 @@ public class GameTest {
         assertEquals(3, liste.get(0).getScore());
         assertEquals(2, liste.get(1).getScore());
         assertEquals(1, liste.get(2).getScore());
-    }
-
-    //Sjekk for collision timeline iCollisionDetector
-    @Test
-    @DisplayName("Sørge for at timeline for collisiondetection ikke starter før den kalles på")
-    public void checkTimelineNotActiveAtStart() {
-        Polyline hitbox = new Polyline(1, 2, 3, 4);
-        Polyline polyline1 = new Polyline(10, 10, 10, 10);
-        Polyline polyline2 = new Polyline(100, 100, 100, 100);
-
-        CollisionDetector collisionDetector = new CollisionDetector(controller, hitbox, polyline1, polyline2);
-
-        assertTrue(collisionDetector.getcollisionDetectionTimeline().getStatus() == Animation.Status.STOPPED);
     }
 
 }
