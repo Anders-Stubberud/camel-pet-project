@@ -1,8 +1,0 @@
-Mangler egt bare skrive til fil + tester + dokumentasjon + interface
-
-Ta bruker til en annen app, vise topp 10, de kan skrive inn navn, dersom navnet er innen topp 10, så oppdateres den
-    Dette kan være en egen klasse som implementerer comparable; Klassen inneholder navn og score, sortere på scoren
-
-Skrive "resultatlisten" til fil. 
-
-Ha med "press "P" to play again, press "R" to ragequit"
