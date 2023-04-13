@@ -3,6 +3,7 @@ package project;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javafx.animation.Animation;
 import javafx.scene.shape.Polyline;
 
 public class GameTest {
@@ -59,7 +61,7 @@ public class GameTest {
         assertTrue(liste.get(0).getScore() == scoreCounter.getAllDataFromFileToListAndSort().get(0).getScore());
     }
 
-    //ScoreCounter sine tester
+    //ScoreCounter's startscore
     @Test
     @DisplayName("Sjekke at spiller begynner med 0 i score")
     public void checkStartScore() {
@@ -67,6 +69,7 @@ public class GameTest {
         assertEquals(0, scoreCounter.getScore());
     }
 
+    //ScoreCounter's username check
     @Test
     @DisplayName("Sjekke at spiller ikke kan legge inn brukernavn med annet enn bokstaver og mellomrom")
     public void checkValidUsername() {
@@ -90,6 +93,19 @@ public class GameTest {
         assertEquals(3, liste.get(0).getScore());
         assertEquals(2, liste.get(1).getScore());
         assertEquals(1, liste.get(2).getScore());
+    }
+
+    //Sjekk for collision timeline iCollisionDetector
+    @Test
+    @DisplayName("Sørge for at timeline for collisiondetection ikke starter før den kalles på")
+    public void checkTimelineNotActiveAtStart() {
+        Polyline hitbox = new Polyline(1, 2, 3, 4);
+        Polyline polyline1 = new Polyline(10, 10, 10, 10);
+        Polyline polyline2 = new Polyline(100, 100, 100, 100);
+
+        CollisionDetector collisionDetector = new CollisionDetector(controller, hitbox, polyline1, polyline2);
+
+        assertTrue(collisionDetector.getcollisionDetectionTimeline().getStatus() == Animation.Status.STOPPED);
     }
 
 }

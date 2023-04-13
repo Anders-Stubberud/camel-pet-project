@@ -22,6 +22,10 @@ public class PlayerTransition {
         this.hitbox = hitbox;
     }
 
+    public boolean getPlayerJumpInProgress() {
+        return playerJumpInProgress;
+    }
+
     public Polyline getHitBox() {
         return hitbox;
     }

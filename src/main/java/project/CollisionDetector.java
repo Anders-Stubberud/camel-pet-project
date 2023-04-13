@@ -14,6 +14,10 @@ public class CollisionDetector {
         crashChecker(hitbox, hitboxNormalObstacle, hitboxSpecialObstacle, controller);
     }));
 
+    public Timeline getcollisionDetectionTimeline() {
+        return collisionDetectionTimeline;
+    }
+
     public void toggleTestFromTest() {
         testFromTest = true;
     }
