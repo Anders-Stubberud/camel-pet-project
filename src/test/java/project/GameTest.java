@@ -35,8 +35,6 @@ public class GameTest {
 
         CollisionDetector collisionDetector = new CollisionDetector(controller, hitbox, polyline1, polyline2);
 
-        collisionDetector.toggleTestFromTest();
-
         assertTrue(collisionDetector.crashChecker(hitbox, polyline1, polyline2, controller));
 
         assertFalse(collisionDetector.crashChecker(hitbox, polyline2, polyline3, controller));
@@ -53,7 +51,6 @@ public class GameTest {
             new ScoreComparer("en", 1)
         ));
 
-        scoreCounter.toggleTestingFromTest();
         scoreCounter.writeStatsToFile(liste);
 
         assertTrue(liste.get(0).getName().equals(scoreCounter.getAllDataFromFileToListAndSort().get(0).getName()));

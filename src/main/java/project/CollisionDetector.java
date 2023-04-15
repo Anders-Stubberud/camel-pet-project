@@ -8,7 +8,6 @@ import javafx.scene.shape.Polyline;
 public class CollisionDetector {
 
     private Controller controller;
-    private boolean testFromTest;
     private Polyline hitbox, hitboxNormalObstacle, hitboxSpecialObstacle;
     private Timeline collisionDetectionTimeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
         crashChecker(hitbox, hitboxNormalObstacle, hitboxSpecialObstacle, controller);
@@ -18,20 +17,12 @@ public class CollisionDetector {
         return collisionDetectionTimeline;
     }
 
-    public void toggleTestFromTest() {
-        testFromTest = true;
-    }
-
     public boolean crashChecker(Polyline hitbox, Polyline hitboxNormalObstacle, Polyline hitboxSpecialObstacle, Controller controller) {
         if (
             hitbox.getBoundsInParent().intersects(hitboxNormalObstacle.getBoundsInParent())
             || hitbox.getBoundsInParent().intersects(hitboxSpecialObstacle.getBoundsInParent())
             ) {
-                if (!testFromTest) {
-                    stopTimeline();
-                    controller.getPlayerTransition().changePlayerGameOver();
-                    controller.getGameOverText().setOpacity(1);
-                }
+            stopTimeline();
             return true;
         } return false;
     }
@@ -50,10 +41,14 @@ public class CollisionDetector {
     }
 
     public void stopTimeline() {
-        collisionDetectionTimeline.stop();
-        controller.gameOver();
-        controller.getObstacleTransition().stopObstacleTransition();
-        controller.getScoreCounter().stopScoreCounter();
+        if (controller.getGameStatus()) {
+            collisionDetectionTimeline.stop();
+            controller.gameOver();
+            controller.getObstacleTransition().stopObstacleTransition();
+            controller.getScoreCounter().stopScoreCounter();
+            controller.getPlayerTransition().changePlayerGameOver();
+            controller.getGameOverText().setOpacity(1);
+        }
     }
 
 }

@@ -32,6 +32,7 @@ public class Controller implements Initializable {
 
     private Stage stage;
     private boolean gameActive;
+    private boolean gamePlayed;
     private CollisionDetector collisionDetector;
     private PlayerTransition playerTransition;
     private ObstacleTransition obstacleTransition;
@@ -62,7 +63,9 @@ public class Controller implements Initializable {
     }
 
     public TextField getUserInput() {
-        return userInput;
+        if (userInput != null) {
+            return userInput;
+        } return null;
     }
 
     public Label getInfo1() {
@@ -119,6 +122,11 @@ public class Controller implements Initializable {
 
     public void gameStarted() {
         gameActive = true;
+        gamePlayed = true;
+    }
+
+    public boolean gamePlay() {
+        return gamePlayed;
     }
 
     public void handleKeyPress() {

@@ -17,7 +17,6 @@ import javafx.animation.Timeline;
 public class ScoreCounter {
     
     private Controller controller;
-    private boolean testingFromTest;
     private List<ScoreComparer> scoreComparerList = new ArrayList<>();
     private int score;
     private Timeline scoreCounterTransitionTimeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {{
@@ -27,10 +26,6 @@ public class ScoreCounter {
 
     public int getScore() {
         return score;
-    }
-
-    public void toggleTestingFromTest() {
-        testingFromTest = true;
     }
 
     public ScoreCounter (Controller controller) {
@@ -58,14 +53,7 @@ public class ScoreCounter {
             boolean avoidNewLineFirstTime = true;
             BufferedWriter skrive = new BufferedWriter(new FileWriter("src/main/java/project/scoreList.txt"));
             for (ScoreComparer scoreComparer : scoreComparerList) {
-                if (avoidNewLineFirstTime && testingFromTest) {
-                    skrive.write(scoreComparer.getName() + "-" + scoreComparer.getScore());
-                    avoidNewLineFirstTime = false;
-                }
-                else if (testingFromTest) {
-                    skrive.write("\n" + scoreComparer.getName() + "-" + scoreComparer.getScore());
-                }
-                else if (avoidNewLineFirstTime) {
+                if (avoidNewLineFirstTime) {
                     skrive.write(scoreComparer.getName() + "-" + scoreComparer.getScore());
                     avoidNewLineFirstTime = false;
                 }
@@ -81,7 +69,7 @@ public class ScoreCounter {
     }
 
     public List<ScoreComparer> getAllDataFromFileToListAndSort() {
-        if (testingFromTest) {
+        if (!controller.gamePlay()) {
             BufferedReader lese;
             try {
                 lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
@@ -103,7 +91,7 @@ public class ScoreCounter {
 
             return scoreComparerList;
         }
-        else if (validUsername(controller.getUserInput().getText()) && !testingFromTest) {
+        else if (validUsername(controller.getUserInput().getText())) {
             BufferedReader lese;
             try {
                 lese = new BufferedReader(new FileReader("src/main/java/project/scoreList.txt"));
